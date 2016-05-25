@@ -43,3 +43,44 @@ Snippets
     - dependencies of libs
     - models which are instantiated when app starts
 - for details on app startup: Developer Guide > Developing Apps > App Initialization
+
+Binding Path
+------------
+Example model:
+{  
+   "company":{  
+      "name":"Treefish Inc",
+      "info":{  
+         "employees":"3"
+      },
+      "contacts":[  
+         {  
+            "name":"Barbara",
+            "phone":"873"
+         },
+         {  
+            "name":"Gerry",
+            "phone":"734"
+         }
+      ]
+   }
+}
+
+corresponding binding path to be used when replacing raw strings:
+- /company/name
+- /company/info/employees
+- /company/contacts
+
+
+{helloPanel>/recipient/name}
+  ^              ^
+model name    binding path
+
+same for i18n:
+{i18n>showHelloButtonText}
+  ^              ^
+model name    binding path (i18n file is flat, leading slash can be ommited)
+
+- enable mix of Text and binding syntax in the view: data-sap-ui-compatVersion="edge"
+- i18n just another model
+- .getText("helloMsg", [sRecipient]);  array containing placeholders for i18n file value
