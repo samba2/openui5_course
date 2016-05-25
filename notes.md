@@ -26,3 +26,16 @@ Inside The Console
   - `yourControl.getParent()` - returns the parent control in the control tree
   - `yourControl.` - shows you all available methods in the console
 
+Snippets
+--------
+- ComponentContainer in index.html > searches for a file "Container.js" in the root
+- manifest.json
+  - "App Descriptor"
+  - sap.app namespace: infos for Fior Lauchpad (FLP)
+  - sap.ui namespace: supported device types by the app
+  - sap.ui5 namespace: 
+    - added UI5 specific config parameters
+    - automatically processed by UI5
+    - rootView: starting view of the component
+    - dependencies of libs
+    - models which are instantiated when app starts
