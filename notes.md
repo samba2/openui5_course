@@ -28,10 +28,13 @@ Inside The Console
 
 Snippets
 --------
-- ComponentContainer in index.html > searches for a file "Container.js" in the root
+- ComponentContainer
+  - can be Fiori Launhpad or
+  - index.html
+  - searches for a file "Container.js" in the root of app
 - manifest.json
   - "App Descriptor"
-  - sap.app namespace: infos for Fior Lauchpad (FLP)
+  - sap.app namespace: infos for Fiori Lauchpad (FLP)
   - sap.ui namespace: supported device types by the app
   - sap.ui5 namespace: 
     - added UI5 specific config parameters
@@ -39,3 +42,4 @@ Snippets
     - rootView: starting view of the component
     - dependencies of libs
     - models which are instantiated when app starts
+- for details on app startup: Developer Guide > Developing Apps > App Initialization
