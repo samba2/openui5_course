@@ -84,3 +84,16 @@ model name    binding path (i18n file is flat, leading slash can be ommited)
 - enable mix of Text and binding syntax in the view: data-sap-ui-compatVersion="edge"
 - i18n just another model
 - .getText("helloMsg", [sRecipient]);  array containing placeholders for i18n file value
+
+Download and Run Example from Explored App
+------------------------------------------
+- select Control
+- "Samples" > Pick the interessting one
+- click upper right icon "Show source code..."
+- when source code is displayed there is a download button at the upper right corner
+- a zip file is downloaded
+- in Web IDE > import from local file system
+- the example contains all data incl. index.html to run independently
+
+- Page Control/ Tag: offers functionality to navigate between pages with animations
+- css margins: ...begin and "..end" instead of left/ right for right to left languages support
