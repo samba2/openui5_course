@@ -97,3 +97,9 @@ Download and Run Example from Explored App
 
 - Page Control/ Tag: offers functionality to navigate between pages with animations
 - css margins: ...begin and "..end" instead of left/ right for right to left languages support
+
+Data Binding Week
+=================
+- Models are bound to the component and propagated to the childen of the component
+- models can also be set on a lower level of the hierarchy and will then be propagated further down to the children
+- 
