@@ -102,4 +102,14 @@ Data Binding Week
 =================
 - Models are bound to the component and propagated to the childen of the component
 - models can also be set on a lower level of the hierarchy and will then be propagated further down to the children
-- 
+- propertiy binding
+  - one json value to a specific field in view
+- aggregation binding
+  - pack content of a list e.g. a JSON array to rows in the view
+
+- model inheritance
+   - from parent to child
+   - setting model on the core is not recommended
+   - if set in the manifest.json (app descriptor) then the model is set to the component
+
+
