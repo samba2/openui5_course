@@ -47,6 +47,7 @@ Snippets
 Binding Path
 ------------
 Example model:
+```
 {  
    "company":{  
       "name":"Treefish Inc",
@@ -65,6 +66,7 @@ Example model:
       ]
    }
 }
+```
 
 corresponding binding path to be used when replacing raw strings:
 - /company/name
@@ -72,18 +74,20 @@ corresponding binding path to be used when replacing raw strings:
 - /company/contacts
 
 
+```
 {helloPanel>/recipient/name}
   ^              ^
 model name    binding path
-
+```
 same for i18n:
+```
 {i18n>showHelloButtonText}
   ^              ^
 model name    binding path (i18n file is flat, leading slash can be ommited)
-
+```
 - enable mix of Text and binding syntax in the view: data-sap-ui-compatVersion="edge"
 - i18n just another model
-- .getText("helloMsg", [sRecipient]);  array containing placeholders for i18n file value
+- `.getText("helloMsg", [sRecipient]);`  array containing placeholders for i18n file value
 
 Download and Run Example from Explored App
 ------------------------------------------
