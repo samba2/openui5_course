@@ -102,8 +102,8 @@ Download and Run Example from Explored App
 - Page Control/ Tag: offers functionality to navigate between pages with animations
 - css margins: ...begin and "..end" instead of left/ right for right to left languages support
 
-Data Binding Week
-=================
+More On Data Binding
+====================
 - Models are bound to the component and propagated to the childen of the component
 - models can also be set on a lower level of the hierarchy and will then be propagated further down to the children
 - propertiy binding
@@ -116,4 +116,51 @@ Data Binding Week
    - setting model on the core is not recommended
    - if set in the manifest.json (app descriptor) then the model is set to the component
 
+### Extended Binding Syntax With Multiple Parts
+  - example: `text="{ parts: [ {path: 'WeightUnit'}, {path: 'WeightMeasure'} ], formatter : '.formatter.delivery' }"`
+  - to display this text
+    - call the function "formatter.delivery" of the current controller
+    - as arguments of the formatter pass in the values of *WeightUnit* and *WeightMeasure* of the model 
 
+### Expression Binding
+  - starts with "{=" or "{:"
+  - `data-sap-ui-xx-bindingSyntax="complex"` has to be turned on
+  - ternary operator
+  - logic inside view, not in the controller
+  - to be used for trivial formatting
+
+### Normal Binding vs. Expression Binding Example
+View:
+```
+<mvc:View controllerName="sample.App" xmlns="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+...
+  <Icon src="sap-icon://message-warning" visible="{path:'status', formatter:'.myFormatter'}">
+...
+</mvc:View>
+```
+
+Controller:
+```
+...
+myFormatter: function(sStatus) {
+  return sStatus === "critical";
+}
+...
+```
+
+With Expression Binding:
+```
+<mvc:View controllerName="sample.app" xmlns="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+...
+  <Icon src="sap-icon://message-warning" visible="{= ${status} === 'critical' }">
+...
+</mvc:View>
+```
+
+### Formatter
+ - basic datatypes like Integer, Date with formatting options
+ - also own data type possible when inheriting from SimpleType
+ - debug data validation
+   - `sap.ui.getCore().attachValidationError(function(event){debugger;})`
+   - get the control which fired an event: `oEvent.getSource()`
+   - get the binding path right away: `oEvent.getSource().getBindingContextPath()`
