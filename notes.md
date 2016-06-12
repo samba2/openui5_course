@@ -164,3 +164,56 @@ With Expression Binding:
    - `sap.ui.getCore().attachValidationError(function(event){debugger;})`
    - get the control which fired an event: `oEvent.getSource()`
    - get the binding path right away: `oEvent.getSource().getBindingContextPath()`
+
+### ListBinding
+ - used to manipulated data displayed in a table
+ - manipulation takes place in the controller
+ - https://sapui5.hana.ondemand.com/docs/api/symbols/sap.ui.model.ListBinding.html
+Example, Register one of the filters stored in _mFilters, depending on users input:
+```
+		_mFilters: {
+			cheap: [new sap.ui.model.Filter("Price", "LT", 100)],
+			moderate: [new sap.ui.model.Filter("Price", "BT", 100, 1000)],
+			expensive: [new sap.ui.model.Filter("Price", "GT", 1000)]
+		},
+		...
+				onQuickFilter: function(oEvent) {
+			var sKey = oEvent.getParameter("key"),
+				oFilter = this._mFilters[sKey],
+				oTable = this.byId("table"),
+				oBinding = oTable.getBinding("items");
+			if (oFilter) {
+				oBinding.filter(oFilter);
+			} else {
+				oBinding.filter([]);
+			}
+		},
+```
+### Responsive
+ - simple hiding of content via CSS: `sapUiHideOnPhone`
+ - data structure with device information: `sap.ui.Device`
+#### auto responsive panels:
+ - panel supports "expandable" property (boolean)
+ - trick: bind the boolean "sap.ui.Device.system.phone" into propery
+1. create new device model in "models" dir:
+```
+			createDeviceModel : function () {
+				var oModel = new JSONModel(Device);
+				oModel.setDefaultBindingMode("OneWay");
+				return oModel;
+			}
+```
+2. this model is registered for the app in Component.js/ init:
+```
+  init: function() {
+        ...
+				// set the device model
+				this.setModel(models.createDeviceModel(), "device");
+```
+3. use this model to dynamically flip switches of controls:
+```
+ 			<Panel
+        ...
+				expandable="{device>/system/phone}"
+				expanded="true">
+```
