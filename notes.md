@@ -217,3 +217,40 @@ Example, Register one of the filters stored in _mFilters, depending on users inp
 				expandable="{device>/system/phone}"
 				expanded="true">
 ```
+
+deep linking - url can be bookmarked an user can return to this page (in contrast to returning to the main page)
+
+execute logic after the route was hit:
+  - `this.getRouter().getRoute("add").attachPatternMatched(this._onRouteMatched, this);`
+  - called in the init function of the controller
+  - register this routers _onRouteMatched function to the route of the name "add"
+  - the name is configured in the manifest.json "routes" array as one of the properties of a route
+
+usage of metadataLoaded promise:
+  - var oModel = this.getModel();
+  - oModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
+  - could not find something in the docu about this promise
+
+- things to consider beside reading/ writing data
+  - busy indication - set view to busy state while the user is waiting
+  - error handling - provide user friendly custom error messages
+  - input validation - client or server side
+  - value help - assist with input of data
+  - data loss confirmation - when leaving the view without saving the data
+
+unbind the view to not show this object again:
+- this.getView().unbindObject();
+
+testing:
+- create a controller stub:
+var oControllerStub = {
+    getModel: sinon.stub().withArgs("i18n").returns(new FakeI18n({
+        formatterMailDelivery : "mail" }))
+};
+
+// inject via bind. TODO lookup the mechanics behind
+var fnIsolatedFormatter = formatter.delivery.bind(oControllerStub);
+
+TODOs
+- check require j
+- check exploratory testing via test tour
