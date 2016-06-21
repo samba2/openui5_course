@@ -218,6 +218,8 @@ Example, Register one of the filters stored in _mFilters, depending on users inp
 				expanded="true">
 ```
 
+
+### Routing
 deep linking - url can be bookmarked an user can return to this page (in contrast to returning to the main page)
 
 execute logic after the route was hit:
@@ -227,11 +229,11 @@ execute logic after the route was hit:
   - the name is configured in the manifest.json "routes" array as one of the properties of a route
 
 usage of metadataLoaded promise:
-  - var oModel = this.getModel();
-  - oModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
+  - `var oModel = this.getModel();`
+  - `oModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));`
   - could not find something in the docu about this promise
 
-- things to consider beside reading/ writing data
+### Considerations When  Talking to the Backend
   - busy indication - set view to busy state while the user is waiting
   - error handling - provide user friendly custom error messages
   - input validation - client or server side
@@ -239,18 +241,44 @@ usage of metadataLoaded promise:
   - data loss confirmation - when leaving the view without saving the data
 
 unbind the view to not show this object again:
-- this.getView().unbindObject();
+- `this.getView().unbindObject();`
 
-testing:
+### Testing
 - create a controller stub:
+```
 var oControllerStub = {
     getModel: sinon.stub().withArgs("i18n").returns(new FakeI18n({
         formatterMailDelivery : "mail" }))
 };
+```
+Dependency injection:
+`var fnIsolatedFormatter = formatter.delivery.bind(oControllerStub);`
 
-// inject via bind. TODO lookup the mechanics behind
-var fnIsolatedFormatter = formatter.delivery.bind(oControllerStub);
+### Extending Controls
+Inheritance  chain of a control:
+```
+Control (UI widget)                     sap.ui.core
+  |
+  v
+Element (UI element)
+  |
+--|----------------------------------------------------
+  v 
+ManagedObject (data binding)            
+  |
+  v
+EventProvider (Eventing)                 sap.ui.base
+  |
+  v
+Object (Lifecycle)
+```
 
-TODOs
-- check require j
-- check exploratory testing via test tour
+Options of enhancing controls:
+- composite control
+  - inheriting from exiting control 
+  - sap.m.Image.extend(sName, oDefinition)
+  - might break if underlying control changes/ is depricated  
+  - see https://sapui5.hana.ondemand.com/#docs/guide/91f087396f4d1014b6dd926db0e91070.html "Inheritance"   
+
+- new control:
+  - sap.ui.core.Control.extend(sName, oDefinition)
